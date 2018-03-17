@@ -1,5 +1,5 @@
 // Copyright (c) 2018 Ethan Margaillan <contact@ethan.jp>.
-// Licensed under the MIT Licence - https://raw.githubusercontent.com/Ethan13310/Thread-Pool-Cpp/master/LICENCE
+// Licensed under the MIT Licence - https://raw.githubusercontent.com/Ethan13310/Thread-Pool-Cpp/master/LICENSE
 
 #pragma once
 

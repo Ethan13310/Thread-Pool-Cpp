@@ -8,9 +8,7 @@ C++14 thread pool implementation.
 * `thread_pool(std::size_t thread_count)` (Constructor) : Number of worker threads to instantiate.
 * `push(Func &&fn, Args &&...args)` : Push a new task into the queue.
 * `clear()` : Remove all pending tasks from the queue.
-* `joinable()` : Check wether worker threads are joinable.
-* `join()` : Wait all worker threads to finish. This function must be called before the thread pool is destroyed, if they haven't been detached before.
-* `detach()` : Detach all worker threads.
+* `join()` : Wait all worker threads to finish. This function is called within the destructor.
 * `thread_count() const` : Get the number of worker threads.
 * `active_count() const` : Get the number of active worker threads (ie. the number of threads which have a task assigned).
 
@@ -25,7 +23,4 @@ auto future{ pool.push([](double n, double p) { return std::pow(n, p); }, 2, 12)
 
 // Get the result from the future
 std::cout << future.get() << std::endl;
-
-// Wait all worker threads to finish
-pool.join();
 ```

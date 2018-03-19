@@ -27,7 +27,12 @@ public:
 		}
 	}
 
-	~thread_pool() = default;
+	~thread_pool()
+	{
+		if (m_workers.size() > 0) {
+			join();
+		}
+	}
 
 	thread_pool(thread_pool const &) = delete;
 	thread_pool(thread_pool &&) = default;
@@ -67,17 +72,6 @@ public:
 		}
 	}
 
-	// Check wether workers are joinable
-	bool joinable() const
-	{
-		for (auto const &thread : m_workers) {
-			if (thread.joinable()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	// Wait all workers to finish
 	void join()
 	{
@@ -89,15 +83,8 @@ public:
 				thread.join();
 			}
 		}
-		m_workers.clear();
-	}
 
-	// Detach all workers
-	void detach()
-	{
-		for (auto &thread : m_workers) {
-			thread.detach();
-		}
+		m_workers.clear();
 	}
 
 	// Get the number of active and waiting workers
